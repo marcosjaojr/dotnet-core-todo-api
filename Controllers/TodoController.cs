@@ -55,7 +55,7 @@ namespace TodoApp.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] TodoItem item)
         {
-            if (id == null || item.Id != id)
+            if (item.Id != id)
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace TodoApp.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _context.TodoItems.FirstOrDefault(t => t.Id = id);
+            var todo = _context.TodoItems.FirstOrDefault(t => t.Id == id);
             if (todo == null)
             {
                 return NotFound();
